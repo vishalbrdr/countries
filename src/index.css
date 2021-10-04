@@ -1,13 +1,453 @@
-body {
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;600;800&display=swap");
+*,
+*::after,
+*::before {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: inherit;
+  outline: none;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+[data-theme="light"] {
+  --input: hsl(0, 0%, 52%);
+  --background: hsl(0, 0%, 98%);
+  --elements: hsl(0, 0%, 100%);
+  --text: hsl(200, 15%, 8%);
+}
+
+[data-theme="dark"] {
+  --elements: hsl(209, 23%, 22%);
+  --background: hsl(207, 26%, 17%);
+  --text: hsl(0, 0%, 100%);
+  --input: var(--text);
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  background-color: var(--background);
+  color: var(--text);
+  font-family: "Nunito Sans", sans-serif;
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+  scrollbar-width: thin;
+  overflow-y: auto;
+  min-height: 100vh;
+  scrollbar-color: var(--background);
+}
+
+body::-webkit-scrollbar-track {
+  background: var(--elements);
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: var(--background);
+  border-radius: 6px;
+  border: 3px solid var(--elements);
+}
+
+li {
+  list-style: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: 90vw;
+}
+
+.Header,
+.Main {
+  display: flex;
+  justify-content: center;
+}
+
+.Header {
+  background-color: var(--elements);
+  padding-block: 2rem;
+  box-shadow: 0 0 1rem rgba(1, 1, 1, 0.1);
+  transition: background-color 300ms ease-in-out;
+  position: fixed;
+  top: 0;
+  z-index: 10;
+  width: 100%;
+}
+
+.Header .container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.heading {
+  font-size: 2.5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .heading {
+    font-size: 2.2rem;
+  }
+}
+
+.btn-theme {
+  background-color: transparent;
+  border: none;
+  font-size: 1.5rem;
+  color: inherit;
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+  .btn-theme {
+    grid-gap: 0.5rem;
+  }
+}
+
+.Main {
+  padding-block: 5rem;
+  margin-top: 5rem;
+}
+
+.Main .container {
+  display: grid;
+  grid-gap: 5rem;
+}
+
+.Main .filter-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.dropdown {
+  display: grid;
+  position: relative;
+  width: 20rem;
+  z-index: 5;
+}
+
+.dropdown .overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.dropdown > .btn {
+  display: flex;
+  align-items: center;
+  border-radius: 0.5rem;
+  justify-content: space-between;
+  padding: 1.5rem 2rem;
+  box-shadow: 0 0 1rem rgba(1, 1, 1, 0.1);
+  position: relative;
+  z-index: 1;
+}
+
+.dropdown > .btn i {
+  font-size: 1.2rem;
+}
+
+.dropdown .btn {
+  font-size: 1.6rem;
+  text-align: left;
+  border: none;
+  background-color: var(--elements);
+  color: inherit;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background-color 300ms ease-in-out;
+}
+
+.dropdown .dropdown-options {
+  display: grid;
+  position: absolute;
+  width: 100%;
+  top: 0;
+  opacity: 0;
+  transform: translateY(10%);
+  transition: all 150ms ease-in-out;
+  pointer-events: none;
+  border-radius: 0.5rem;
+  background-color: var(--elements);
+  padding-block: 0.7rem;
+  box-shadow: 0 0 1rem rgba(1, 1, 1, 0.1);
+}
+
+.dropdown .dropdown-options.active {
+  opacity: 1;
+  transform: translateY(30%);
+  pointer-events: all;
+}
+
+.dropdown .dropdown-options .btn {
+  padding: 0.7rem 2rem;
+  transition: background-color 300ms ease;
+}
+
+.dropdown .dropdown-options .btn:hover {
+  background-color: var(--background);
+}
+
+.search-input {
+  display: flex;
+  align-items: center;
+  background-color: var(--elements);
+  max-width: 40rem;
+  width: 50vw;
+  min-width: 30rem;
+  gap: 2rem;
+  padding-inline: 3rem;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  color: var(--input);
+  box-shadow: 0 0 1rem rgba(1, 1, 1, 0.1);
+  transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+  .search-input {
+    height: 55%;
+    width: 100%;
+  }
+}
+
+.search-input i {
+  font-size: 1.5rem;
+}
+
+.search-input input {
+  background-color: transparent;
+  border: none;
+  color: inherit;
+  flex-grow: 1;
+  height: 100%;
+}
+
+.search-input input::placeholder {
+  color: inherit;
+}
+
+.countries {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
+  grid-gap: 5rem;
+}
+
+@media screen and (max-width: 600px) {
+  .countries {
+    justify-content: center;
+    justify-items: center;
+  }
+}
+
+.Card {
+  display: grid;
+  background-color: var(--elements);
+  border-radius: 0.7rem;
+  overflow: hidden;
+  height: max-content;
+  padding-bottom: 3rem;
+  box-shadow: 0 0 1rem rgba(1, 1, 1, 0.1);
+  max-width: 35rem;
+  transition: background-color 300ms ease-in-out;
+}
+
+.Card:hover img {
+  transform: scale(1.15);
+}
+
+.Card .flag {
+  align-items: flex-start;
+  overflow: hidden;
+}
+
+.Card .flag img {
+  width: 100%;
+  height: 15rem;
+  object-fit: cover;
+  transition: transform 300ms ease-in-out;
+}
+
+@media screen and (max-width: 600px) {
+  .Card .flag img {
+    height: auto;
+  }
+}
+
+.Card .country-info {
+  padding: 2rem;
+  display: grid;
+  grid-gap: 1rem;
+}
+
+.Card .country-info .country-name {
+  font-size: 1.8rem;
+}
+
+.Card .country-info .coiuntry-stats {
+  display: grid;
+  grid-gap: 0.5rem;
+  font-size: 1.4rem;
+}
+
+.Card .country-info .coiuntry-stats strong {
+  font-weight: 600;
+}
+
+.Country {
+  font-size: 1.5rem;
+}
+
+.Country .content {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 5rem;
+}
+
+@media screen and (max-width: 1100px) {
+  .Country .content {
+    align-content: center;
+    justify-content: center;
+  }
+}
+
+.Country .btn {
+  display: flex;
+  font-size: 1.5rem;
+  align-items: center;
+  gap: 1rem;
+  width: max-content;
+  padding: 1rem 2rem;
+  background-color: var(--elements);
+  border-radius: 0.7rem;
+  box-shadow: 0 0 1rem rgba(1, 1, 1, 0.1);
+  font-weight: 600;
+  transition: background-color 300ms ease-in-out;
+}
+
+.Country .flag {
+  display: flex;
+  width: 45%;
+  max-height: 60vh;
+  box-shadow: 0 0 1rem rgba(1, 1, 1, 0.1);
+  min-width: 50rem;
+}
+
+@media screen and (max-width: 1100px) {
+  .Country .flag {
+    width: 100%;
+    max-height: max-content;
+    max-width: 60rem;
+    min-width: 20rem;
+  }
+}
+
+.Country .flag img {
+  width: 100%;
+}
+
+.Country .info {
+  width: 45%;
+  display: grid;
+  align-content: center;
+  grid-gap: 3rem;
+}
+
+.Country .info strong {
+  font-weight: 600;
+  flex-shrink: 0;
+  height: 80%;
+}
+
+@media screen and (max-width: 800px) {
+  .Country .info strong {
+    height: auto;
+  }
+}
+
+@media screen and (max-width: 1100px) {
+  .Country .info {
+    width: 60%;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .Country .info {
+    width: 100%;
+  }
+}
+
+.Country .more-info {
+  display: flex;
+  gap: 2rem;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 800px) {
+  .Country .more-info {
+    flex-direction: column;
+    gap: 3rem;
+  }
+}
+
+.Country .more-info .col {
+  display: grid;
+  align-content: start;
+  grid-gap: 1rem;
+}
+
+.Country .border-countries {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+@media screen and (max-width: 800px) {
+  .Country .border-countries {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+
+.Country .border-countries .ctr {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.fa-spin {
+  animation-duration: 800ms;
+}
+
+.fa-3x {
+  position: absolute;
+  left: 50%;
+  top: 45%;
+  transform: translate(-50%, 50%);
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  margin-block: 5rem;
+  gap: 1rem;
+  font-size: 1.2rem;
+  align-self: end;
+}
+
+.footer a {
+  font-weight: 600;
 }
