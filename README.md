@@ -34,8 +34,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Github](https://your-solution-url.com)
-- Live Site URL: [Github Pages](https://your-live-site-url.com)
+- Solution URL: [Github](https://github.com/vishalbrdr/countries)
+- Live Site URL: [Github Pages](https://vishalbrdr.github.io/countries)
 
 ## My process
 
