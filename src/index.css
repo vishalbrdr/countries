@@ -34,7 +34,6 @@ body {
   transition: background-color 300ms ease-in-out, color 300ms ease-in-out;
   scrollbar-width: thin;
   overflow-y: auto;
-  min-height: 100vh;
   scrollbar-color: var(--background);
 }
 

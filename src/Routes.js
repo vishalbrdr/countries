@@ -1,5 +1,5 @@
 import React from 'react'
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { HashRouter as Router, Switch, Route } from "react-router-dom";
 import App from './App';
 import Country from './Country';
 
@@ -7,12 +7,12 @@ import Country from './Country';
 export default function Routes() {
     return (
         <div>
-            <BrowserRouter>
+            <Router>
                 <Switch>
                     <Route path="/" exact component={App} />
                     <Route path="/:country" exact component={Country} />
                 </Switch>
-            </BrowserRouter>
+            </Router>
         </div>
     )
 }

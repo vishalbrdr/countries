@@ -9,8 +9,12 @@ function App() {
 
 
   useEffect(() => {
-    axios.get("https://restcountries.com/v3/all").then(res => setCountries(res.data))
+    const ourRequest = axios.CancelToken.source()
+    axios.get("https://restcountries.com/v3/all", {
+      cancelToken: ourRequest.token, // <-- 2nd step
+    }).then(res => setCountries(res.data))
     return () => {
+      ourRequest.cancel() // <-- 3rd step
     }
   }, [])
 

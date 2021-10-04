@@ -15,10 +15,16 @@ const Country = ({ match }) => {
 
     useEffect(() => {
         setBorderCountries("")
-        if (country && country[0].borders) {
-            axios.get(`https://restcountries.com/v2/all`).then(res => (
+        const ourRequest = axios.CancelToken.source()
+        if (country[0] && country[0].borders) {
+            axios.get(`https://restcountries.com/v2/all`, {
+                cancelToken: ourRequest.token, // <-- 2nd step
+            }).then(res => (
                 setBorderCountries(country[0].borders.map(c => res.data.filter(cr => cr.alpha3Code === c)))
             ))
+        }
+        return () => {
+            ourRequest.cancel() // <-- 3rd step
         }
 
     }, [country])
